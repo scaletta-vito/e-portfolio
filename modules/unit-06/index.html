@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6 | Project Proposal | E-Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary: #1a365d; --primary-light: #2c5282; --accent: #c53030; --bg-cream: #fdfcf9; --bg-warm: #f7f5f0; --text-dark: #2d3748; --text-muted: #4a5568; --border: #e2e0db; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Source Sans Pro', sans-serif; background: var(--bg-cream); color: var(--text-dark); line-height: 1.7; }
+        h1, h2, h3 { font-family: 'Libre Baskerville', serif; color: var(--primary); }
+        nav { background: var(--primary); padding: 1rem 2rem; }
+        .nav-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { color: white; text-decoration: none; font-family: 'Libre Baskerville', serif; }
+        .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; padding: 0.5rem 1rem; font-weight: 600; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .breadcrumb { margin-bottom: 1.5rem; color: var(--text-muted); }
+        .breadcrumb a { color: var(--primary-light); text-decoration: none; }
+        section { background: white; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; border: 1px solid var(--border); }
+        section h2 { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent); display: inline-block; }
+        h3 { margin: 1.5rem 0 1rem; font-size: 1.2rem; color: var(--primary-light); }
+        p { margin-bottom: 1rem; text-align: justify; }
+        ul { margin-left: 1.5rem; margin-bottom: 1rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 1rem; border: 1px solid var(--border); text-align: left; }
+        th { background: var(--bg-warm); font-weight: 700; color: var(--primary); }
+        .artefact-list { list-style: none; margin-left: 0; }
+        .artefact-list li { padding: 0.75rem; background: var(--bg-warm); margin-bottom: 0.5rem; border-radius: 4px; border-left: 4px solid var(--primary-light); }
+        .artefact-list li i { margin-right: 0.5rem; color: var(--primary); }
+        .artefact-list li a { color: var(--primary-light); text-decoration: none; font-weight: 600; }
+        .artefact-list li a:hover { text-decoration: underline; color: var(--primary); }
+        footer { background: var(--primary); color: rgba(255,255,255,0.8); text-align: center; padding: 1.5rem; margin-top: 2rem; }
+        .unit-nav { display: flex; justify-content: space-between; margin-top: 2rem; }
+        .unit-nav a { color: var(--primary-light); text-decoration: none; font-weight: 600; }
+        .highlight-box { background: var(--bg-warm); border-left: 4px solid var(--accent); padding: 1rem; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Kanan Akparov</a>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../index.html#reflection">Reflection</a>
+                <a href="../../index.html#units">All Units</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <p class="breadcrumb"><a href="../../index.html">Home</a> / <a href="../../index.html#units">Units</a> / Unit 6</p>
+
+        <section>
+            <h2>Unit 6: Project Proposal</h2>
+            <p>This unit marked the beginning of the collaborative project phase. Teams were formed, project domains selected, and initial proposals developed. This was a critical milestone that established the foundation for the final project deliverable in Unit 11.</p>
+            
+            <div class="highlight-box">
+                <strong>Key Deliverable:</strong> Team project proposal outlining scope, data sources, methodology, and expected outcomes. See <a href="../../index.html#evaluation">Project Evaluation</a> for comparison with final delivery.
+            </div>
+
+            <h3>Learning Outcomes</h3>
+            <ul>
+                <li>Form effective teams for collaborative data projects</li>
+                <li>Define realistic project scope based on available resources</li>
+                <li>Develop clear project proposals with measurable objectives</li>
+                <li>Apply database design principles to real-world scenarios</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Unit Reflection</h2>
+            <table>
+                <tr>
+                    <th width="20%">Criteria</th>
+                    <th width="40%">Experience</th>
+                    <th width="40%">Learning</th>
+                </tr>
+                <tr>
+                    <td><strong>What?</strong><br>(Description)</td>
+                    <td>In this unit, I explored the principles of designing relational databases, focusing on key fields, data integrity, and normalization techniques. I learned how to identify anomalies in databases and practiced creating logical and physical database designs for our team proposal.</td>
+                    <td>The unit introduced key database concepts such as relational structures, normalization forms, and the importance of eliminating data anomalies. I gained a clearer understanding of the terminology and processes involved in constructing robust database architectures.</td>
+                </tr>
+                <tr>
+                    <td><strong>So what?</strong><br>(Analysis)</td>
+                    <td>Working through database design exercises made me realize how crucial normalization is for maintaining data integrity and preventing redundancy. Understanding key fields helped me see how tables relate and how data retrieval depends on well-structured relationships.</td>
+                    <td>This deepened my knowledge of database theory, highlighting the practical impact of normalization on real-world data storage and retrieval. It also emphasized the need for careful planning in both logical and physical design stages to ensure efficient and scalable database systems.</td>
+                </tr>
+                <tr>
+                    <td><strong>Now what?</strong><br>(Outcome)</td>
+                    <td>In future projects, I plan to apply normalization principles more rigorously and double-check for anomalies during design. I want to practice creating both logical and physical database schemas to enhance my ability to design effective data architectures.</td>
+                    <td>Professionally, I aim to further study advanced database design techniques, including optimization and indexing strategies, to improve performance. I also want to explore tools that assist in database modeling and normalization to streamline the design process.</td>
+                </tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>Team Collaboration Evidence</h2>
+            <p>Screenshots documenting team discussions during the project proposal phase:</p>
+            <ul class="artefact-list">
+                <li><i class="fas fa-comments"></i> Team discussion - Initial project scoping</li>
+                <li><i class="fas fa-comments"></i> Team discussion - Dataset selection</li>
+                <li><i class="fas fa-comments"></i> Team discussion - Role assignments</li>
+                <li><i class="fas fa-comments"></i> Team discussion - Timeline planning</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Artefacts</h2>
+            <ul class="artefact-list">
+                <li><a href="https://github.com/KananAkparovDOST/e-portfolio/tree/main/modules/unit-06/artefacts" target="_blank"><i class="fas fa-folder-open"></i> View all Unit 6 artefacts on GitHub</a></li>
+            </ul>
+        </section>
+
+        <div class="unit-nav">
+            <a href="../unit-05/index.html"><i class="fas fa-arrow-left"></i> Unit 5</a>
+            <a href="../unit-07/index.html">Unit 7 <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Kanan Akparov | Deciphering Big Data Module</p>
+    </footer>
+</body>
+</html>

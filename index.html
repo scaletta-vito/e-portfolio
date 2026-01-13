@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio | Kanan Akparov | Deciphering Big Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #c53030;
+            --accent-light: #fc8181;
+            --bg-cream: #fdfcf9;
+            --bg-warm: #f7f5f0;
+            --text-dark: #2d3748;
+            --text-muted: #4a5568;
+            --border: #e2e0db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Libre Baskerville', serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            color: white;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        /* Main content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        section h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem;
+            color: var(--primary-light);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 4rem 2.5rem;
+            text-align: center;
+            border: none;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .hero .module-info {
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--bg-warm);
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-cream);
+        }
+
+        /* Code blocks */
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .code-comment {
+            color: #94a3b8;
+        }
+
+        .code-keyword {
+            color: #f472b6;
+        }
+
+        .code-string {
+            color: #a5f3fc;
+        }
+
+        .code-function {
+            color: #fbbf24;
+        }
+
+        /* Units grid */
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .unit-card {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-light);
+        }
+
+        .unit-card h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+            text-align: left;
+        }
+
+        /* Meeting notes */
+        .meeting {
+            background: var(--bg-warm);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .meeting h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .meeting-meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .meeting ul {
+            margin-left: 1.5rem;
+        }
+
+        .meeting li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills matrix */
+        .skill-bar {
+            background: var(--bg-warm);
+            height: 24px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+
+        /* References */
+        .reference {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            padding-left: 2rem;
+            text-indent: -2rem;
+        }
+
+        .reference:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            table {
+                font-size: 0.85rem;
+            }
+
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+
+        /* Reflection framework styling */
+        .reflection-framework {
+            background: var(--bg-warm);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .framework-label {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="nav-brand">Kanan Akparov</a>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#reflection">Reflection</a>
+                <a href="#evaluation">Evaluation</a>
+                <a href="#technical">Technical</a>
+                <a href="#skills">Skills</a>
+                <a href="#meetings">Meetings</a>
+                <a href="#units">Units</a>
+                <a href="#references">References</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <h1>Kanan Akparov</h1>
+            <p class="subtitle">Director, Dost Digital Innovation Centre</p>
+            <p class="module-info">Deciphering Big Data Module | April 2025</p>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About This Portfolio</h2>
+            <p>This e-portfolio documents my learning journey through the Deciphering Big Data module. It collates evidence of work completed across twelve units, including technical activities, collaborative discussions, team contributions, and critical reflections on professional development.</p>
+            <p>The portfolio is structured to demonstrate competency in data extraction, exploration, cleaning, and modelling techniques. It includes an evaluation comparing the initial project proposal (Unit 6) against the final deliverables (Unit 11), along with documented evidence of team collaboration and peer engagement throughout the module.</p>
+        </section>
+
+        <!-- Reflection Section -->
+        <section id="reflection">
+            <h2>Reflective Analysis</h2>
+            <p><em>This reflection follows Rolfe et al.'s (2001) reflective framework, structured around three key questions: What? So what? Now what? This approach enables systematic analysis of experiences and their implications for future practice.</em></p>
+
+            <div class="reflection-framework">
+                <span class="framework-label">WHAT? — Description</span>
+                <p>The Deciphering Big Data module introduced me to the fundamental concepts, tools, and methodologies required for working with large-scale datasets. Over twelve units, I engaged with topics spanning the 4Vs of big data (Volume, Variety, Velocity, Veracity), data extraction from multiple sources, cleaning and transformation techniques using Python and Pandas, database design principles including normalisation to Third Normal Form, and compliance considerations under GDPR.</p>
+                <p>My primary technical work involved developing a data pipeline for the team project, which required extracting data from CSV and JSON sources, cleaning inconsistencies and handling missing values, designing a normalised relational database schema, and documenting the entire process for reproducibility. I also participated in collaborative discussions on data management challenges, GDPR compliance implications, and database design trade-offs, contributing posts and responding to peers' perspectives.</p>
+            </div>
+
+            <div class="reflection-framework">
+                <span class="framework-label">SO WHAT? — Analysis and Interpretation</span>
+                <p>Working through this module fundamentally changed my understanding of data as an organisational asset. Prior to this experience, I viewed data primarily through a storage lens—ensuring files were backed up and accessible. The module revealed that effective data management requires strategic thinking about quality, governance, and analytical readiness from the outset (Sardar and Pandey, 2024).</p>
+                <p>The team project proved particularly transformative. Initially, I underestimated the complexity of coordinating data work across multiple contributors. Our first attempts at collaborative cleaning resulted in version conflicts and inconsistent transformations. This experience aligned with Kolb's (1984) experiential learning cycle: the concrete experience of failure prompted reflective observation, leading to abstract conceptualisation of better practices, which we then tested through active experimentation with version control and documented procedures.</p>
+                <p>Emotionally, the module presented significant challenges. The Unit 6 proposal deadline coincided with professional responsibilities at the Innovation Centre, creating stress that affected my initial contributions. I felt frustration when my database design required substantial revision following peer feedback. However, Schön's (1983) concept of reflection-in-action helped me reframe these moments not as failures but as essential learning opportunities. The discomfort of receiving critical feedback ultimately strengthened both the project outcome and my capacity for professional growth.</p>
+                <p>Analysing my collaborative discussion contributions revealed an evolution in critical thinking. Early posts tended toward descriptive summaries of readings. By Unit 8's GDPR discussion, I was synthesising multiple sources, identifying tensions between compliance requirements and analytical utility, and proposing practical frameworks for resolution. This progression demonstrates development of higher-order analytical skills essential for data leadership roles.</p>
+            </div>
+
+            <div class="reflection-framework">
+                <span class="framework-label">NOW WHAT? — Future Actions and Development</span>
+                <p>This module has crystallised several priorities for my continued professional development. First, I recognise the need to deepen my technical proficiency with Python libraries beyond Pandas. The limitations I encountered when attempting more complex transformations highlighted gaps that additional study of NumPy and Scikit-learn would address (McKinney, 2022).</p>
+                <p>Second, the team collaboration challenges have motivated me to explore project management methodologies specifically designed for data work. I plan to investigate DataOps practices and tools that facilitate collaborative data pipelines with proper versioning and documentation. This knowledge will directly benefit my leadership role at the Innovation Centre, where I oversee teams working with governmental datasets.</p>
+                <p>Third, the GDPR discussions revealed the importance of maintaining current knowledge of regulatory frameworks. Data protection requirements continue to evolve, and my professional responsibilities require staying informed of changes that affect how we collect, process, and store citizen data. I have committed to completing a formal data protection certification within the next six months.</p>
+                <p>Finally, this reflective process itself has proven valuable. Following Rolfe et al.'s (2001) structured approach transformed what might have been superficial self-assessment into genuine insight. I intend to maintain a reflective journal for future professional development activities, using this framework to extract maximum learning from experiences both positive and challenging.</p>
+            </div>
+
+            <h3>Impact on Professional Development</h3>
+            <p>The skills and knowledge acquired through this module have immediate applicability to my role directing the Dost Digital Innovation Centre. We are currently planning a data modernisation initiative for government services, and the principles of database normalisation, data quality assurance, and GDPR compliance covered in this module directly inform that work. The experience of designing and evaluating a data pipeline provides a template I can adapt for organisational projects.</p>
+            <p>Perhaps more significantly, the module has shifted my perspective on data literacy as a leadership competency. I now recognise that effective digital transformation requires leaders who understand not just what data can do, but how it must be managed responsibly. This understanding will shape how I advocate for resources, structure teams, and evaluate proposals in my professional capacity.</p>
+        </section>
+
+        <!-- Project Evaluation Section -->
+        <section id="evaluation">
+            <h2>Project Evaluation: Unit 6 Proposal vs Unit 11 Final</h2>
+            <p>This section provides a comparative analysis between the initial project proposal submitted in Unit 6 and the final project deliverables completed in Unit 11. The evaluation examines changes across seven key dimensions, explaining variances and lessons learned.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dimension</th>
+                        <th>Unit 6 Proposal</th>
+                        <th>Unit 11 Final</th>
+                        <th>Variance Analysis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Project Scope</strong></td>
+                        <td>Comprehensive data warehouse integrating five government datasets with real-time dashboard</td>
+                        <td>Focused data pipeline processing two datasets with documented cleaning procedures and static reporting</td>
+                        <td>Scope reduced by 60% after feasibility analysis revealed time and resource constraints. Lesson: initial proposals benefited from reality-checking against available capacity.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Sources</strong></td>
+                        <td>Five sources: citizen services, transportation, healthcare, education, environmental sensors</td>
+                        <td>Two sources: citizen services registry (CSV) and service feedback (JSON)</td>
+                        <td>Consolidation improved depth of cleaning and transformation. Quality over quantity proved more valuable for demonstrating competency.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cleaning Approach</strong></td>
+                        <td>Automated pipeline with machine learning-based anomaly detection</td>
+                        <td>Systematic manual cleaning using Pandas with documented decision rules for handling missing values, duplicates, and inconsistencies</td>
+                        <td>ML-based approach was overambitious given team skill levels. Manual approach with clear documentation proved more rigorous and reproducible.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database Design</strong></td>
+                        <td>Star schema data warehouse with multiple fact tables</td>
+                        <td>Normalised relational database (3NF) with five tables and documented ER diagram</td>
+                        <td>Relational design better suited learning objectives. Star schema deferred to future work when analytical requirements are clearer.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Collaboration</strong></td>
+                        <td>Proposed weekly synchronous meetings with shared coding environment</td>
+                        <td>Bi-weekly meetings supplemented by asynchronous communication; individual work merged via version control</td>
+                        <td>Timezone differences made synchronous work impractical. Asynchronous model with clear documentation proved more effective.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GDPR Compliance</strong></td>
+                        <td>Brief mention of "ensuring compliance"</td>
+                        <td>Detailed data protection impact assessment, documented lawful basis for processing, pseudonymisation procedures</td>
+                        <td>Unit 8 discussions revealed inadequacy of initial compliance consideration. Final project includes substantive compliance documentation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quality Assurance</strong></td>
+                        <td>Unspecified "testing procedures"</td>
+                        <td>Documented validation rules, data profiling reports, and sample-based verification procedures</td>
+                        <td>Specific QA procedures developed through iterative learning. Final approach demonstrates systematic quality management.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Key Lessons Learned</h3>
+            <p>The variance between proposal and final delivery reflects genuine learning rather than failure. The initial proposal demonstrated enthusiasm and ambition but lacked grounding in practical constraints. Through the module, I developed skills in realistic scoping, iterative refinement, and quality-focused delivery. The final project, while smaller in scope, demonstrates deeper competency in core data wrangling skills than the original ambitious proposal would have achieved.</p>
+        </section>
+
+        <!-- Technical Activities Section -->
+        <section id="technical">
+            <h2>Technical Activities</h2>
+            <p>This section documents practical data wrangling activities completed during the module, demonstrating application of techniques covered in course materials.</p>
+
+            <h3>Data Cleaning with Pandas</h3>
+            <p>The following code demonstrates cleaning procedures applied to the citizen services dataset, addressing missing values, duplicates, and data type inconsistencies (McKinney, 2022).</p>
+            
+            <pre><code><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
+<span class="code-keyword">import</span> numpy <span class="code-keyword">as</span> np
+
+<span class="code-comment"># Load raw data from CSV source</span>
+df = pd.<span class="code-function">read_csv</span>(<span class="code-string">'citizen_services.csv'</span>)
+
+<span class="code-comment"># Initial data profiling</span>
+<span class="code-function">print</span>(f<span class="code-string">"Original shape: {df.shape}"</span>)
+<span class="code-function">print</span>(f<span class="code-string">"Missing values:\n{df.isnull().sum()}"</span>)
+
+<span class="code-comment"># Remove duplicate records based on citizen_id</span>
+df_clean = df.<span class="code-function">drop_duplicates</span>(subset=[<span class="code-string">'citizen_id'</span>], keep=<span class="code-string">'first'</span>)
+<span class="code-function">print</span>(f<span class="code-string">"Removed {len(df) - len(df_clean)} duplicate records"</span>)
+
+<span class="code-comment"># Handle missing values with appropriate strategies</span>
+<span class="code-comment"># Numerical: median imputation for robustness against outliers</span>
+df_clean[<span class="code-string">'service_rating'</span>] = df_clean[<span class="code-string">'service_rating'</span>].<span class="code-function">fillna</span>(
+    df_clean[<span class="code-string">'service_rating'</span>].<span class="code-function">median</span>()
+)
+
+<span class="code-comment"># Categorical: mode imputation for most common value</span>
+df_clean[<span class="code-string">'service_category'</span>] = df_clean[<span class="code-string">'service_category'</span>].<span class="code-function">fillna</span>(
+    df_clean[<span class="code-string">'service_category'</span>].<span class="code-function">mode</span>()[0]
+)
+
+<span class="code-comment"># Standardise date format</span>
+df_clean[<span class="code-string">'request_date'</span>] = pd.<span class="code-function">to_datetime</span>(
+    df_clean[<span class="code-string">'request_date'</span>], 
+    format=<span class="code-string">'mixed'</span>,
+    errors=<span class="code-string">'coerce'</span>
+)
+
+<span class="code-comment"># Remove invalid dates</span>
+df_clean = df_clean.<span class="code-function">dropna</span>(subset=[<span class="code-string">'request_date'</span>])
+
+<span class="code-comment"># Validate and clean text fields</span>
+df_clean[<span class="code-string">'citizen_name'</span>] = df_clean[<span class="code-string">'citizen_name'</span>].<span class="code-function">str.strip</span>().<span class="code-function">str.title</span>()
+
+<span class="code-comment"># Export cleaned dataset</span>
+df_clean.<span class="code-function">to_csv</span>(<span class="code-string">'citizen_services_cleaned.csv'</span>, index=<span class="code-keyword">False</span>)
+<span class="code-function">print</span>(f<span class="code-string">"Final shape: {df_clean.shape}"</span>)</code></pre>
+
+            <h3>Database Normalisation to 3NF</h3>
+            <p>The original flat file contained redundant data violating normalisation principles. The following demonstrates the normalisation process applied to achieve Third Normal Form, eliminating transitive dependencies (Sardar and Pandey, 2024).</p>
+            
+            <p><strong>Original Unnormalised Structure:</strong></p>
+            <table>
+                <tr>
+                    <th>citizen_id</th>
+                    <th>citizen_name</th>
+                    <th>address</th>
+                    <th>service_id</th>
+                    <th>service_name</th>
+                    <th>service_category</th>
+                    <th>category_description</th>
+                    <th>request_date</th>
+                </tr>
+                <tr>
+                    <td>C001</td>
+                    <td>Ahmad Mammadov</td>
+                    <td>Baku, AZ</td>
+                    <td>S101</td>
+                    <td>Passport Renewal</td>
+                    <td>Documentation</td>
+                    <td>Official document services</td>
+                    <td>2025-03-15</td>
+                </tr>
+            </table>
+
+            <p><strong>Normalised Structure (3NF):</strong></p>
+            <p><em>Citizens Table (citizen_id → citizen_name, address)</em></p>
+            <table>
+                <tr><th>citizen_id (PK)</th><th>citizen_name</th><th>address</th></tr>
+                <tr><td>C001</td><td>Ahmad Mammadov</td><td>Baku, AZ</td></tr>
+            </table>
+
+            <p><em>Categories Table (category_id → category_name, description)</em></p>
+            <table>
+                <tr><th>category_id (PK)</th><th>category_name</th><th>description</th></tr>
+                <tr><td>CAT01</td><td>Documentation</td><td>Official document services</td></tr>
+            </table>
+
+            <p><em>Services Table (service_id → service_name, category_id)</em></p>
+            <table>
+                <tr><th>service_id (PK)</th><th>service_name</th><th>category_id (FK)</th></tr>
+                <tr><td>S101</td><td>Passport Renewal</td><td>CAT01</td></tr>
+            </table>
+
+            <p><em>Service_Requests Table (request_id → citizen_id, service_id, request_date)</em></p>
+            <table>
+                <tr><th>request_id (PK)</th><th>citizen_id (FK)</th><th>service_id (FK)</th><th>request_date</th></tr>
+                <tr><td>R001</td><td>C001</td><td>S101</td><td>2025-03-15</td></tr>
+            </table>
+
+            <h3>Automated Data Pipeline</h3>
+            <p>The following script demonstrates an automated pipeline that extracts, transforms, and loads data while maintaining audit logs.</p>
+
+            <pre><code><span class="code-keyword">import</span> pandas <span class="code-keyword">as</span> pd
+<span class="code-keyword">import</span> json
+<span class="code-keyword">from</span> datetime <span class="code-keyword">import</span> datetime
+
+<span class="code-keyword">class</span> <span class="code-function">DataPipeline</span>:
+    <span class="code-string">"""ETL pipeline for citizen services data processing."""</span>
+    
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self, config_path):
+        <span class="code-keyword">with</span> <span class="code-function">open</span>(config_path) <span class="code-keyword">as</span> f:
+            self.config = json.<span class="code-function">load</span>(f)
+        self.audit_log = []
+    
+    <span class="code-keyword">def</span> <span class="code-function">extract</span>(self, source_path):
+        <span class="code-string">"""Extract data from CSV or JSON source."""</span>
+        <span class="code-keyword">if</span> source_path.<span class="code-function">endswith</span>(<span class="code-string">'.csv'</span>):
+            data = pd.<span class="code-function">read_csv</span>(source_path)
+        <span class="code-keyword">elif</span> source_path.<span class="code-function">endswith</span>(<span class="code-string">'.json'</span>):
+            data = pd.<span class="code-function">read_json</span>(source_path)
+        self.<span class="code-function">_log</span>(f<span class="code-string">"Extracted {len(data)} records from {source_path}"</span>)
+        <span class="code-keyword">return</span> data
+    
+    <span class="code-keyword">def</span> <span class="code-function">transform</span>(self, df):
+        <span class="code-string">"""Apply cleaning and transformation rules."""</span>
+        initial_count = <span class="code-function">len</span>(df)
+        
+        <span class="code-comment"># Apply configured transformations</span>
+        df = df.<span class="code-function">drop_duplicates</span>()
+        df = df.<span class="code-function">dropna</span>(subset=self.config[<span class="code-string">'required_fields'</span>])
+        
+        self.<span class="code-function">_log</span>(f<span class="code-string">"Transformed: {initial_count} → {len(df)} records"</span>)
+        <span class="code-keyword">return</span> df
+    
+    <span class="code-keyword">def</span> <span class="code-function">load</span>(self, df, output_path):
+        <span class="code-string">"""Load processed data to destination."""</span>
+        df.<span class="code-function">to_csv</span>(output_path, index=<span class="code-keyword">False</span>)
+        self.<span class="code-function">_log</span>(f<span class="code-string">"Loaded {len(df)} records to {output_path}"</span>)
+    
+    <span class="code-keyword">def</span> <span class="code-function">_log</span>(self, message):
+        <span class="code-string">"""Record audit log entry."""</span>
+        entry = {
+            <span class="code-string">'timestamp'</span>: datetime.<span class="code-function">now</span>().<span class="code-function">isoformat</span>(),
+            <span class="code-string">'message'</span>: message
+        }
+        self.audit_log.<span class="code-function">append</span>(entry)
+        <span class="code-function">print</span>(f<span class="code-string">"[{entry['timestamp']}] {message}"</span>)
+
+<span class="code-comment"># Execute pipeline</span>
+pipeline = <span class="code-function">DataPipeline</span>(<span class="code-string">'pipeline_config.json'</span>)
+raw_data = pipeline.<span class="code-function">extract</span>(<span class="code-string">'citizen_services.csv'</span>)
+clean_data = pipeline.<span class="code-function">transform</span>(raw_data)
+pipeline.<span class="code-function">load</span>(clean_data, <span class="code-string">'processed_services.csv'</span>)</code></pre>
+        </section>
+
+        <!-- Skills Matrix Section -->
+        <section id="skills">
+            <h2>Skills Matrix</h2>
+            <p>This matrix documents competencies developed through the module, with self-assessed proficiency levels based on demonstrated work and practical application.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Skill Area</th>
+                        <th>Description</th>
+                        <th>Proficiency</th>
+                        <th>Evidence</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Data Extraction</strong></td>
+                        <td>Extracting data from CSV, JSON, and database sources using Python</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+                        </td>
+                        <td>Unit 3-4 exercises, final project pipeline</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Cleaning</strong></td>
+                        <td>Handling missing values, duplicates, inconsistencies using Pandas</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                        </td>
+                        <td>Technical activities, project data preparation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database Design</strong></td>
+                        <td>Designing normalised relational schemas (1NF, 2NF, 3NF)</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+                        </td>
+                        <td>Unit 7 activities, ER diagrams, project schema</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Python Programming</strong></td>
+                        <td>Writing clean, documented Python code for data processing</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 70%"></div></div>
+                        </td>
+                        <td>Jupyter notebooks, pipeline scripts</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GDPR Compliance</strong></td>
+                        <td>Understanding data protection principles and implementation</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+                        </td>
+                        <td>Unit 8-10 discussions, compliance documentation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Visualisation</strong></td>
+                        <td>Creating meaningful visual representations of data</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 65%"></div></div>
+                        </td>
+                        <td>Project reporting, exploratory analysis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Critical Analysis</strong></td>
+                        <td>Evaluating data quality, methodologies, and outcomes</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+                        </td>
+                        <td>Collaborative discussions, peer feedback</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Team Collaboration</strong></td>
+                        <td>Working effectively in distributed teams on data projects</td>
+                        <td>
+                            <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+                        </td>
+                        <td>Team meetings, project contributions</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Meeting Notes Section -->
+        <section id="meetings">
+            <h2>Team Meeting Notes</h2>
+            <p>Documentation of team meetings conducted during the collaborative project phase.</p>
+
+            <div class="meeting">
+                <h4>Meeting 1: Project Kickoff</h4>
+                <p class="meeting-meta"><i class="fas fa-calendar"></i> 15 April 2025 | <i class="fas fa-clock"></i> 14:00-15:00 GMT | <i class="fas fa-video"></i> Microsoft Teams</p>
+                <p><strong>Attendees:</strong> Kanan Akparov, [Team Member 2], [Team Member 3]</p>
+                <p><strong>Agenda:</strong></p>
+                <ul>
+                    <li>Review assignment requirements and marking criteria</li>
+                    <li>Discuss potential datasets and project scope</li>
+                    <li>Assign initial research tasks</li>
+                    <li>Establish communication channels and meeting schedule</li>
+                </ul>
+                <p><strong>Decisions Made:</strong></p>
+                <ul>
+                    <li>Selected government citizen services as the project domain</li>
+                    <li>Agreed to use GitHub for version control and collaboration</li>
+                    <li>Kanan to draft initial project proposal for team review</li>
+                    <li>Bi-weekly meetings scheduled for Tuesdays at 14:00 GMT</li>
+                </ul>
+                <p><strong>Action Items:</strong></p>
+                <ul>
+                    <li>All: Review Module 1-4 materials on data extraction by 22 April</li>
+                    <li>Kanan: Prepare dataset samples for team evaluation</li>
+                    <li>[Team Member 2]: Research GDPR requirements for government data</li>
+                </ul>
+            </div>
+
+            <div class="meeting">
+                <h4>Meeting 2: Design Review</h4>
+                <p class="meeting-meta"><i class="fas fa-calendar"></i> 29 April 2025 | <i class="fas fa-clock"></i> 14:00-15:30 GMT | <i class="fas fa-video"></i> Microsoft Teams</p>
+                <p><strong>Attendees:</strong> Kanan Akparov, [Team Member 2], [Team Member 3]</p>
+                <p><strong>Agenda:</strong></p>
+                <ul>
+                    <li>Review draft project proposal</li>
+                    <li>Discuss database schema design</li>
+                    <li>Address scope concerns raised by tutor feedback</li>
+                </ul>
+                <p><strong>Decisions Made:</strong></p>
+                <ul>
+                    <li>Reduced scope from 5 datasets to 2 for feasibility</li>
+                    <li>Adopted normalised relational design instead of star schema</li>
+                    <li>Agreed on standardised cleaning procedures for consistency</li>
+                    <li>Kanan assigned as lead for database design component</li>
+                </ul>
+                <p><strong>Action Items:</strong></p>
+                <ul>
+                    <li>Kanan: Complete ER diagram and normalisation documentation by 6 May</li>
+                    <li>[Team Member 2]: Develop data cleaning scripts for CSV source</li>
+                    <li>[Team Member 3]: Draft GDPR compliance checklist</li>
+                </ul>
+            </div>
+
+            <div class="meeting">
+                <h4>Meeting 3: Final Review</h4>
+                <p class="meeting-meta"><i class="fas fa-calendar"></i> 20 May 2025 | <i class="fas fa-clock"></i> 14:00-16:00 GMT | <i class="fas fa-video"></i> Microsoft Teams</p>
+                <p><strong>Attendees:</strong> Kanan Akparov, [Team Member 2], [Team Member 3]</p>
+                <p><strong>Agenda:</strong></p>
+                <ul>
+                    <li>Review completed deliverables against requirements</li>
+                    <li>Conduct quality assurance check</li>
+                    <li>Finalise submission documentation</li>
+                </ul>
+                <p><strong>Decisions Made:</strong></p>
+                <ul>
+                    <li>All core requirements confirmed as complete</li>
+                    <li>Additional validation testing to be completed before submission</li>
+                    <li>Executive summary to be written by Kanan</li>
+                    <li>Final submission scheduled for 25 May deadline</li>
+                </ul>
+                <p><strong>Lessons Learned Discussion:</strong></p>
+                <ul>
+                    <li>Earlier scope reduction would have allowed deeper analysis</li>
+                    <li>More frequent check-ins beneficial for distributed teams</li>
+                    <li>Documentation should be maintained throughout, not retrospectively</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Units Section -->
+        <section id="units">
+            <h2>Module Units</h2>
+            <p>Click each unit to view detailed reflections and artefacts.</p>
+
+            <div class="units-grid">
+                <a href="modules/unit-01/index.html" class="unit-card">
+                    <h4>Unit 1</h4>
+                    <p>Introduction to Big Data: The 4Vs framework, data characteristics, and management challenges</p>
+                </a>
+                <a href="modules/unit-02/index.html" class="unit-card">
+                    <h4>Unit 2</h4>
+                    <p>Data Collection: Sources, formats, and extraction methodologies</p>
+                </a>
+                <a href="modules/unit-03/index.html" class="unit-card">
+                    <h4>Unit 3</h4>
+                    <p>Data Storage: Database types, storage architectures, and selection criteria</p>
+                </a>
+                <a href="modules/unit-04/index.html" class="unit-card">
+                    <h4>Unit 4</h4>
+                    <p>Data Cleaning: Quality issues, transformation techniques, and validation</p>
+                </a>
+                <a href="modules/unit-05/index.html" class="unit-card">
+                    <h4>Unit 5</h4>
+                    <p>Data Integration: Combining sources, handling heterogeneity, and ETL processes</p>
+                </a>
+                <a href="modules/unit-06/index.html" class="unit-card">
+                    <h4>Unit 6</h4>
+                    <p>Project Proposal: Team formation, scope definition, and initial planning</p>
+                </a>
+                <a href="modules/unit-07/index.html" class="unit-card">
+                    <h4>Unit 7</h4>
+                    <p>Database Design: Normalisation, ER modelling, and schema development</p>
+                </a>
+                <a href="modules/unit-08/index.html" class="unit-card">
+                    <h4>Unit 8</h4>
+                    <p>Data Compliance: GDPR principles, legal requirements, and implementation</p>
+                </a>
+                <a href="modules/unit-09/index.html" class="unit-card">
+                    <h4>Unit 9</h4>
+                    <p>Data Security: Protection mechanisms, access control, and risk management</p>
+                </a>
+                <a href="modules/unit-10/index.html" class="unit-card">
+                    <h4>Unit 10</h4>
+                    <p>Data Analysis: Exploratory techniques, statistical methods, and insights</p>
+                </a>
+                <a href="modules/unit-11/index.html" class="unit-card">
+                    <h4>Unit 11</h4>
+                    <p>Final Project: Implementation, testing, and deliverable completion</p>
+                </a>
+                <a href="modules/unit-12/index.html" class="unit-card">
+                    <h4>Unit 12</h4>
+                    <p>Module Review: Reflection, evaluation, and future directions</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- References Section -->
+        <section id="references">
+            <h2>References</h2>
+            
+            <div class="reference">
+                Kolb, D.A. (1984) <em>Experiential Learning: Experience as the Source of Learning and Development</em>. Englewood Cliffs, NJ: Prentice-Hall.
+            </div>
+            <div class="reference">
+                McKinney, W. (2022) <em>Python for Data Analysis: Data Wrangling with Pandas, NumPy, and Jupyter</em>. 3rd edn. Sebastopol, CA: O'Reilly Media.
+            </div>
+            <div class="reference">
+                Provost, F. and Fawcett, T. (2013) <em>Data Science for Business: What You Need to Know about Data Mining and Data-Analytic Thinking</em>. Sebastopol, CA: O'Reilly Media.
+            </div>
+            <div class="reference">
+                Rolfe, G., Freshwater, D. and Jasper, M. (2001) <em>Critical Reflection for Nursing and the Helping Professions: A User's Guide</em>. Basingstoke: Palgrave Macmillan.
+            </div>
+            <div class="reference">
+                Sardar, T.H. and Pandey, B.K. (2024) <em>Big Data Computing</em>. New Delhi: BPB Publications.
+            </div>
+            <div class="reference">
+                Schön, D.A. (1983) <em>The Reflective Practitioner: How Professionals Think in Action</em>. New York: Basic Books.
+            </div>
+            <div class="reference">
+                The University of Edinburgh (n.d.) <em>Reflection Toolkit</em>. Available at: https://www.ed.ac.uk/reflection (Accessed: 20 May 2025).
+            </div>
+            <div class="reference">
+                Voigt, P. and Von dem Bussche, A. (2017) <em>The EU General Data Protection Regulation (GDPR): A Practical Guide</em>. Cham: Springer.
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Kanan Akparov | Deciphering Big Data Module | University of Essex Online</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
